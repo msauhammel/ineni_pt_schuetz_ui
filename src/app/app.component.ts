@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {RouterOutlet} from '@angular/router';
 import {EmployeeService} from './employee.service';
 import {MaterialModule} from './material.module';
@@ -11,7 +11,8 @@ import {MaterialModule} from './material.module';
   imports: [
     FormsModule,
     RouterOutlet,
-    MaterialModule
+    MaterialModule,
+    NgIf
   ],
   styleUrl: './app.component.css'
 })

@@ -27,8 +27,8 @@
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Email</mat-label>
             <input matInput [(ngModel)]="employee.email" name="email" required email>
-            <mat-error *ngIf="employeeForm.controls['email']?.hasError('required')">Email is required</mat-error>
-            <mat-error *ngIf="employeeForm.controls['email']?.hasError('email')">Please enter a valid email</mat-error>
+            <mat-error *ngIf="employeeForm.controls['email'].hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="employeeForm.controls['email'].hasError('email')">Please enter a valid email</mat-error>
           </mat-form-field>
 
           <!-- New Position Field -->

@@ -3,7 +3,7 @@
 FROM node:18-alpine as build-step
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm ci
 RUN npm run build
 
 # Stage 2: Serve the app with NGINX
