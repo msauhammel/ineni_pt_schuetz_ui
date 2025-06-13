@@ -2,7 +2,7 @@ name: Build and Release Angular App with Helm and GHCR
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 
 env:
   IMAGE_NAME: employee-frontend
@@ -52,15 +52,15 @@ jobs:
           if [ ! -f "$VERSION_FILE" ]; then
             echo "0.1.0" > "$VERSION_FILE"
           fi
-          
+
           OLD_VERSION=$(cat "$VERSION_FILE")
           IFS='.' read -r MAJOR MINOR PATCH <<< "$OLD_VERSION"
           PATCH=$((PATCH + 1))
           NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "$NEW_VERSION" > "$VERSION_FILE"
-          
+
           sed -i "s/^version: .*/version: $NEW_VERSION/" "${{ env.CHART_DIR }}/Chart.yaml"
-          
+
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Update Helm values.yaml with image version
@@ -88,10 +88,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           mkdir -p charts
           cp packaged-chart/*.tgz charts/
-          
+
           git add VERSION ${{ env.CHART_DIR }}/Chart.yaml ${{ env.CHART_DIR }}/values.yaml charts/
           git commit -m "Auto-bump version to v${{ steps.bump_version.outputs.new_version }} [skip ci]" || echo "No changes to commit"
           git push
