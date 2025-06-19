@@ -11,8 +11,9 @@ FROM nginx:alpine
 # Copy custom nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy the Angular app to the nginx directory
-COPY --from=build-step /dist/inenipt-project-ui /usr/share/nginx/html
+RUN rm -rf /usr/share/nginx/html/*
+
+COPY --from=build-step /app/dist/inenipt-project-ui /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
