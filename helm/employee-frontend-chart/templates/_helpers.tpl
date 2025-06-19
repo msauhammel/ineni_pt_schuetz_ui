@@ -18,3 +18,11 @@
 {{- default "default" .Values.serviceAccount.name -}}
 {{- end -}}
 {{- end }}
+
+{{- define "employee-frontend-chart.labels" -}}
+helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+app.kubernetes.io/name: {{ include "employee-frontend-chart.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+app.kubernetes.io/version: {{ .Chart.AppVersion }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
